@@ -1,24 +1,23 @@
-#include "AudioPlayback.h"
+#include "MainComponent.hpp"
 
 //==============================================================================
-class GuiAppApplication : public juce::JUCEApplication {
+class GuiAppApplication : public JUCEApplication {
   public:
-    //==============================================================================
     GuiAppApplication() {}
 
-    const juce::String getApplicationName() override {
+    const String getApplicationName() override {
         return ProjectInfo::projectName;
     }
-    const juce::String getApplicationVersion() override {
+    const String getApplicationVersion() override {
         return ProjectInfo::versionString;
     }
     bool moreThanOneInstanceAllowed() override { return true; }
 
     //==============================================================================
-    void initialise(const juce::String& commandLine) override {
+    void initialise(const String& commandLine) override {
         // This method is where you should put your application's initialisation
         // code..
-        juce::ignoreUnused(commandLine);
+        ignoreUnused(commandLine);
 
         mainWindow.reset(new MainWindow(getApplicationName()));
     }
@@ -37,29 +36,29 @@ class GuiAppApplication : public juce::JUCEApplication {
         quit();
     }
 
-    void anotherInstanceStarted(const juce::String& commandLine) override {
+    void anotherInstanceStarted(const String& commandLine) override {
         // When another instance of the app is launched while this one is
         // running, this method is invoked, and the commandLine parameter tells
         // you what the other instance's command-line arguments were.
-        juce::ignoreUnused(commandLine);
+        ignoreUnused(commandLine);
     }
 
     //==============================================================================
     /*
         This class implements the desktop window that contains an instance of
-        our AudioPlayback class.
+        our MainComponent class.
     */
-    class MainWindow : public juce::DocumentWindow {
+    class MainWindow : public DocumentWindow {
       public:
-        explicit MainWindow(juce::String name)
+        explicit MainWindow(String name)
             : DocumentWindow(
                   name,
-                  juce::Desktop::getInstance()
+                  Desktop::getInstance()
                       .getDefaultLookAndFeel()
                       .findColour(ResizableWindow::backgroundColourId),
                   DocumentWindow::allButtons) {
             setUsingNativeTitleBar(true);
-            setContentOwned(new AudioPlayback(), true);
+            setContentOwned(new MainComponent(), true);
 
 #if JUCE_IOS || JUCE_ANDROID
             setFullScreen(true);
@@ -72,9 +71,9 @@ class GuiAppApplication : public juce::JUCEApplication {
         }
 
         void closeButtonPressed() override {
-            // This is called when the user tries to close this window. Here,
-            // we'll just ask the app to quit when this happens, but you can
-            // change this to do whatever you need.
+            /* This is called when the user tries to close this window. Here,
+             * we'll just ask the app to quit when this happens, but you can
+             * change this to do whatever you need. */
             JUCEApplication::getInstance()->systemRequestedQuit();
         }
 

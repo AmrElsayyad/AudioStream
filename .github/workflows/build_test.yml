@@ -13,9 +13,9 @@ jobs:
     strategy:
       matrix:
         os:
-          - runner: ubuntu-22.04
-          - runner: macos-latest
           - runner: windows-latest
+          - runner: ubuntu-latest
+          - runner: macos-latest
       fail-fast: false
 
     steps:
