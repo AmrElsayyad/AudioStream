@@ -4,5 +4,5 @@ target_sources(UnitTests PRIVATE
   SimpleTestCase.cpp
 )
 
-target_link_libraries(UnitTests PRIVATE ${CMAKE_PROJECT_NAME} Catch2::Catch2)
+target_link_libraries(UnitTests PRIVATE Catch2::Catch2)
 catch_discover_tests(UnitTests)

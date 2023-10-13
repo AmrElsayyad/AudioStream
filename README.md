@@ -1,6 +1,6 @@
 # JUCE Project Template
 
-[![Build and Test](https://github.com/fshstk/jucetest/actions/workflows/build_test.yml/badge.svg)](https://github.com/fshstk/jucetest/actions/workflows/build_test.yml)
+[![Build and Test](https://github.com/AmrElsayyad/AudioStream/actions/workflows/build_test.yml/badge.svg)](https://github.com/AmrElsayyad/AudioStream/actions/workflows/build_test.yml)
 
 This is an attempt at a barebones template for a cross-platform plugin/app using
 the [JUCE](https://github.com/juce-framework/JUCE) framework. CMake is used to
