@@ -70,8 +70,8 @@ void ConnectingState::resized() {
     Component::resized();
 
     auto rect = getLocalBounds();
-    const int rectHeight = static_cast<int>(rect.getHeight() / 8);
-    const int fontHeight = static_cast<int>(rect.getHeight() / 12);
+    const auto& rectHeight = static_cast<int>(rect.getHeight() / 8);
+    const auto& fontHeight = static_cast<float>(rect.getHeight() / 12);
 
     ipLabel.setBounds(rect.removeFromTop(rectHeight));
     ipEditor.setBounds(rect.removeFromTop(rectHeight));
@@ -169,9 +169,9 @@ SendingState::~SendingState() { shutdownAudio(); }
 void SendingState::paint(Graphics& g) {
     auto rect = getLocalBounds();
     rect.removeFromLeft(10);
-    rect = rect.removeFromTop(rect.getHeight() / 2.5);
+    rect = rect.removeFromTop(static_cast<int>(rect.getHeight() / 2.5));
 
-    g.setFont(rect.getHeight() / 5);
+    g.setFont(static_cast<float>(rect.getHeight() / 5));
     g.setColour(juce::Colours::white);
     g.drawText("Audio Level:", rect, juce::Justification::centredLeft, true);
 }
@@ -252,7 +252,7 @@ void SendingState::getNextAudioBlock(
             actualInputChannel, bufferToFill.startSample);
 
         for (size_t sample = 0; sample < numSamples; ++sample) {
-            outBuffer[sample] = inBuffer[sample] * level / 100.0;
+            outBuffer[sample] = inBuffer[sample] * level / 100.0f;
         }
 
         senderPtr->send(AUDIO_STREAM_ADDRESS_PATTERN,
@@ -276,8 +276,8 @@ void ListeningState::resized() {
     Component::resized();
 
     auto rect = getLocalBounds();
-    const int rectHeight = static_cast<int>(rect.getHeight() / 8);
-    const int fontHeight = static_cast<int>(rect.getHeight() / 12);
+    const auto& rectHeight = static_cast<int>(rect.getHeight() / 8);
+    const auto& fontHeight = static_cast<float>(rect.getHeight() / 12);
     rect.reduce(0, rectHeight);
 
     portLabel.setBounds(rect.removeFromTop(rectHeight));
@@ -359,9 +359,9 @@ ReceivingState::~ReceivingState() { shutdownAudio(); }
 void ReceivingState::paint(Graphics& g) {
     auto rect = getLocalBounds();
     rect.removeFromLeft(10);
-    rect = rect.removeFromTop(rect.getHeight() / 2.5);
+    rect = rect.removeFromTop(static_cast<int>(rect.getHeight() / 2.5));
 
-    g.setFont(rect.getHeight() / 5);
+    g.setFont(static_cast<float>(rect.getHeight() / 5));
     g.setColour(juce::Colours::white);
     g.drawText("Audio Level:", rect, juce::Justification::centredLeft, true);
 }
@@ -453,7 +453,7 @@ void ReceivingState::getNextAudioBlock(
             receivedBuffers[readIndex++ % AUDIO_STREAM_CIRCULAR_BUFFER_SIZE];
 
         for (size_t sample = 0; sample < numSamples; ++sample) {
-            outBuffer[sample] = inBuffer[sample] * level / 100.0;
+            outBuffer[sample] = inBuffer[sample] * level / 100.0f;
         }
     }
 }
