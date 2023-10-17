@@ -1,5 +1,9 @@
 #include "State.hpp"
 
+#ifdef _MSC_VER
+#define __PRETTY_FUNCTION__ __FUNCSIG__
+#endif
+
 //==============================================================================
 void StoppedState::resized() {
     Logger::writeToLog(__PRETTY_FUNCTION__);
@@ -7,7 +11,7 @@ void StoppedState::resized() {
     Component::resized();
 
     auto rect = getLocalBounds();
-    const auto height = rect.getHeight() / 2.5;
+    const auto height = static_cast<int>(rect.getHeight() / 2.5);
 
     auto topRect = rect.removeFromTop(height);
     auto bottomRect = rect.removeFromBottom(height);
@@ -66,8 +70,8 @@ void ConnectingState::resized() {
     Component::resized();
 
     auto rect = getLocalBounds();
-    const int rectHeight = rect.getHeight() / 8;
-    const int fontHeight = rect.getHeight() / 12;
+    const int rectHeight = static_cast<int>(rect.getHeight() / 8);
+    const int fontHeight = static_cast<int>(rect.getHeight() / 12);
 
     ipLabel.setBounds(rect.removeFromTop(rectHeight));
     ipEditor.setBounds(rect.removeFromTop(rectHeight));
@@ -178,7 +182,7 @@ void SendingState::resized() {
     Component::resized();
 
     auto rect = getLocalBounds();
-    const auto height = rect.getHeight() / 2.5;
+    const auto height = static_cast<int>(rect.getHeight() / 2.5);
 
     auto topRect = rect.removeFromTop(height);
     auto bottomRect = rect.removeFromBottom(height);
@@ -272,8 +276,8 @@ void ListeningState::resized() {
     Component::resized();
 
     auto rect = getLocalBounds();
-    const int rectHeight = rect.getHeight() / 8;
-    const int fontHeight = rect.getHeight() / 12;
+    const int rectHeight = static_cast<int>(rect.getHeight() / 8);
+    const int fontHeight = static_cast<int>(rect.getHeight() / 12);
     rect.reduce(0, rectHeight);
 
     portLabel.setBounds(rect.removeFromTop(rectHeight));
@@ -368,7 +372,7 @@ void ReceivingState::resized() {
     Component::resized();
 
     auto rect = getLocalBounds();
-    const auto height = rect.getHeight() / 2.5;
+    const auto height = static_cast<int>(rect.getHeight() / 2.5);
 
     auto topRect = rect.removeFromTop(height);
     auto bottomRect = rect.removeFromBottom(height);
@@ -462,3 +466,4 @@ void ReceivingState::stopButtonClicked() {
     addChangeListener(SharedResourcePointer<StoppedState>());
     sendChangeMessage();
 }
+
