@@ -1,4 +1,4 @@
-#include "MainComponent.hpp"
+#include "StateMachine.hpp"
 
 //==============================================================================
 class GuiAppApplication : public JUCEApplication {
@@ -46,7 +46,7 @@ class GuiAppApplication : public JUCEApplication {
     //==============================================================================
     /*
         This class implements the desktop window that contains an instance of
-        our MainComponent class.
+        our StateMachine class.
     */
     class MainWindow : public DocumentWindow {
       public:
@@ -58,7 +58,7 @@ class GuiAppApplication : public JUCEApplication {
                       .findColour(ResizableWindow::backgroundColourId),
                   DocumentWindow::allButtons) {
             setUsingNativeTitleBar(true);
-            setContentOwned(new MainComponent(), true);
+            setContentOwned(new StateMachine(), true);
 
 #if JUCE_IOS || JUCE_ANDROID
             setFullScreen(true);

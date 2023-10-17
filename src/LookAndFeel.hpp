@@ -3,7 +3,7 @@
 #include <JuceHeader.h>
 
 //==============================================================================
-class AudioStreamLookAndFeel : public LookAndFeel_V4 {
+class ButtonLookAndFeel : public LookAndFeel_V4 {
   public:
     void drawButtonText(Graphics& g, TextButton& button,
                         bool /*shouldDrawButtonAsHighlighted*/,
@@ -32,7 +32,11 @@ class AudioStreamLookAndFeel : public LookAndFeel_V4 {
                              Justification::centred, 1);
         }
     }
+};
 
+//==============================================================================
+class LabelLookAndFeel : public LookAndFeel_V4 {
+  public:
     void drawLabel(Graphics& g, Label& label) override {
         g.fillAll(label.findColour(Label::backgroundColourId));
 
@@ -60,7 +64,11 @@ class AudioStreamLookAndFeel : public LookAndFeel_V4 {
 
         g.drawRect(label.getLocalBounds());
     }
+};
 
+//==============================================================================
+class SliderTextBoxLookAndFeel : public LookAndFeel_V4 {
+  public:
     Label* createSliderTextBox(Slider& slider) override {
         Label* l = LookAndFeel_V4::createSliderTextBox(slider);
 

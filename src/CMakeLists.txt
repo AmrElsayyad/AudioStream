@@ -21,6 +21,7 @@ juce_generate_juce_header(${CMAKE_PROJECT_NAME})
 
 target_sources(${CMAKE_PROJECT_NAME}
     PRIVATE
+        State.cpp
         Main.cpp)
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC .)
@@ -39,7 +40,7 @@ target_compile_definitions(${CMAKE_PROJECT_NAME}
 
 target_link_libraries(${CMAKE_PROJECT_NAME}
     PRIVATE
-        # GuiAppData            # If we'd created a binary data target, we'd link to it here
+        Catch2::Catch2
         juce::juce_audio_basics
         juce::juce_audio_devices
         juce::juce_audio_formats
